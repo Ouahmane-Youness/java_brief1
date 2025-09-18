@@ -1,4 +1,4 @@
-class Account{
+public class Account{
     private String accountNumber;
     private double sold;
     private String accountType;
@@ -31,4 +31,20 @@ class Account{
         }
         sold -= total;
     }
+
+    public String getAccountNumber()
+    {
+        return accountNumber;
+    }
+    public double getSold()
+    {
+        return sold;
+    }
+    public String getAccountType()
+    {
+        return accountType;
+    }
+
+
+
 }
