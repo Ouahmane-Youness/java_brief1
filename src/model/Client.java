@@ -1,3 +1,5 @@
+package model;
+
 public class Client{
     private int id;
     private String lastName;
@@ -37,6 +39,8 @@ public class Client{
     {
         return id;
     }
+
+
 
 
 
