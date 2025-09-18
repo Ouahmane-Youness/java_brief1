@@ -29,6 +29,7 @@ public class TransactionService {
 
         account.debitAccount(total);
         account.addTransaction(transaction);
+        return true;
     }
 
 }

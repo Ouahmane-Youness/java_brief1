@@ -1,6 +1,6 @@
 package model;
 
-public class Client{
+public class Client extends Person{
     private int id;
     private String lastName;
     private String firstName;
@@ -42,7 +42,17 @@ public class Client{
 
 
 
-
+    @Override
+    public void displayMenu() {
+        System.out.println("\n=== CLIENT MENU ===");
+        System.out.println("1. Check your balance");
+        System.out.println("2. Make a deposit");
+        System.out.println("3. Make a withdrawal");
+        System.out.println("4. Make a transfer");
+        System.out.println("5. View bank statement");
+        System.out.println("6. Logout");
+        System.out.print("Your choice: ");
+    }
 
 }
 

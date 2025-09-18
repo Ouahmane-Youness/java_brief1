@@ -5,7 +5,7 @@ public class Administrator extends Person{
 
 
     public Administrator(int id, String last_name, String first_name, String password, String idAdminstrator) {
-        super(id, last_name, first_name, password);
+        super( last_name, first_name, password);
         this.idAdminstrator = idAdminstrator;
     }
 
@@ -28,6 +28,8 @@ public class Administrator extends Person{
         System.out.println("5. Déconnecte");
         System.out.print("Votre choix: ");
     }
+
+
 
 
 }
