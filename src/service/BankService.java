@@ -131,7 +131,7 @@ public class BankService {
 
             if (TransactionService.makeDeposit(account, amount)) {
                 System.out.println("Deposit successful!");
-                System.out.println("New balance: " + account.getSold() + " $");
+                System.out.println("New balance: " + account.getSold() + " DH");
             } else {
                 System.out.println("Deposit failed.");
             }
@@ -146,7 +146,7 @@ public class BankService {
 
             if (TransactionService.makeWithdrawl(account, amount)) {
                 System.out.println("Withdrawal successful!");
-                System.out.println("New balance: " + account.getSold() + " $");
+                System.out.println("New balance: " + account.getSold() + " DH");
             } else {
                 System.out.println("Withdrawal failed.");
             }
@@ -194,21 +194,21 @@ public class BankService {
         if (sourceAccount == null) return;
 
         System.out.println("Selected source account: " + sourceAccount);
-        System.out.println("Available balance: $" + sourceAccount.getSold());
+        System.out.println("Available balance: DH" + sourceAccount.getSold());
 
         System.out.print("\nEnter the account number to send money TO: ");
         String destinationAccountNumber = scanner.next();
         Account destinationAccount = findAccountByNumber(destinationAccountNumber);
 
 
-        System.out.print("Enter amount to transfer: $");
+        System.out.print("Enter amount to transfer: DH");
 
             double amount = scanner.nextDouble();
 
             System.out.println("\n TRANSFER CONFIRMATION:");
             System.out.println("FROM: " + sourceAccount.getAccountNumber() + " (Your account)");
             System.out.println("TO: " + destinationAccountNumber);
-            System.out.println("AMOUNT: $" + amount);
+            System.out.println("AMOUNT: DH" + amount);
             System.out.print("Confirm transfer? (y/n): ");
 
             String confirmation = scanner.next();
@@ -219,7 +219,7 @@ public class BankService {
 
             if (TransactionService.makeTransfer(sourceAccount, destinationAccount, amount)) {
                 System.out.println("Transfer successful!");
-                System.out.println("Your new balance: $" + sourceAccount.getSold());
+                System.out.println("Your new balance: DH" + sourceAccount.getSold());
             } else {
                 System.out.println("Transfer failed. Please check account number and try again.");
             }
