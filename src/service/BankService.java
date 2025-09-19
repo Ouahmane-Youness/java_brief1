@@ -24,10 +24,20 @@ public class BankService {
     static {
         Client client1 = new Client("ouahmane100", "ouahmane", "youness", "youness@gmail.com", "123");
         clients.put(client1.getIdClient(), client1);
-
         Account account1 = new Account("ACC" + (++accountCounter), 1500.0, AccountType.COURANT);
         client1.addAccount(account1);
+
+        Client client2 = new Client("amine200", "amine", "amaine", "amain@gmail.com", "123");
+        clients.put(client2.getIdClient(), client2);
+        Account account2 = new Account("ACC" + (++accountCounter), 2000.0, AccountType.COURANT);
+        client2.addAccount(account2);
+
+        Client client3 = new Client("johnson300", "johnson", "sarah", "sarah@gmail.com", "789");
+        clients.put(client3.getIdClient(), client3);
+        Account account3 = new Account("ACC" + (++accountCounter), 1000.0, AccountType.COURANT);
+        client3.addAccount(account3);
     }
+
 
     public static Administrator authenticateManager(String managerId, String password) {
         Administrator administrator = administrators.get(managerId);
@@ -77,7 +87,7 @@ public class BankService {
                 case 3:
                     makeWithdrawal(client, scanner);
                 case 4:
-                    //transferMoney(client, scanner);
+                    transferMoney(client, scanner);
                     break;
                 case 5:
                     //viewStatement(client, scanner);
@@ -164,7 +174,7 @@ public class BankService {
             int choice = scanner.nextInt();
 
             if (choice == 0) {
-                return null; // User cancelled
+                return null;
             }
 
             if (choice >= 1 && choice <= accountsArray.length) {
@@ -174,5 +184,57 @@ public class BankService {
                 return null;
             }
 
+    }
+
+    private static void transferMoney(Client client, Scanner scanner) {
+        System.out.println("\n=== MONEY TRANSFER ===");
+
+        System.out.println("Select YOUR account to send money FROM:");
+        Account sourceAccount = selectAccount(client, scanner);
+        if (sourceAccount == null) return;
+
+        System.out.println("Selected source account: " + sourceAccount);
+        System.out.println("Available balance: $" + sourceAccount.getSold());
+
+        System.out.print("\nEnter the account number to send money TO: ");
+        String destinationAccountNumber = scanner.next();
+        Account destinationAccount = findAccountByNumber(destinationAccountNumber);
+
+
+        System.out.print("Enter amount to transfer: $");
+
+            double amount = scanner.nextDouble();
+
+            System.out.println("\n TRANSFER CONFIRMATION:");
+            System.out.println("FROM: " + sourceAccount.getAccountNumber() + " (Your account)");
+            System.out.println("TO: " + destinationAccountNumber);
+            System.out.println("AMOUNT: $" + amount);
+            System.out.print("Confirm transfer? (y/n): ");
+
+            String confirmation = scanner.next();
+            if (!confirmation.equalsIgnoreCase("y")) {
+                System.out.println("Transfer cancelled.");
+                return;
+            }
+
+            if (TransactionService.makeTransfer(sourceAccount, destinationAccount, amount)) {
+                System.out.println("Transfer successful!");
+                System.out.println("Your new balance: $" + sourceAccount.getSold());
+            } else {
+                System.out.println("Transfer failed. Please check account number and try again.");
+            }
+
+
+    }
+
+    private static Account findAccountByNumber(String accountNumber) {
+        for (Client client : clients.values()) {
+            for (Account account : client.getAccountsCollection()) {
+                if (account.getAccountNumber().equals(accountNumber)) {
+                    return account; // Found the account!
+                }
+            }
+        }
+        return null; // Account not found
     }
 }

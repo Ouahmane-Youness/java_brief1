@@ -31,5 +31,52 @@ public class TransactionService {
         account.addTransaction(transaction);
         return true;
     }
+    public static boolean processTransfer(Account sourceAccount, Account destinationAccount, double amount) {
+            String transactionId = "TN" + (++transactionCounter);
 
+            // Create single transaction record for both accounts
+            Transaction transaction = new Transaction(
+                    transactionId,
+                    TransactionType.TRANSFER,
+                    amount,
+                    sourceAccount.getAccountNumber(),
+                    destinationAccount.getAccountNumber()
+            );
+
+            sourceAccount.debitAccount(amount);
+
+            destinationAccount.creditAccount(amount);
+
+            sourceAccount.addTransaction(transaction);
+            destinationAccount.addTransaction(transaction);
+
+            return true;
+
+
+    }
+
+    public static boolean makeTransfer(Account sourceAccount, Account destinationAccount, double amount) {
+
+
+            String idTransaction = "TN" + (++transactionCounter);
+
+            // Create transaction record for both accounts
+            Transaction transaction = new Transaction(
+                    idTransaction,
+                    TransactionType.TRANSFER,
+                    amount,
+                    sourceAccount.getAccountNumber(),
+                    destinationAccount.getAccountNumber()
+            );
+
+            sourceAccount.debitAccount(amount);
+            destinationAccount.creditAccount(amount);
+
+            sourceAccount.addTransaction(transaction);
+            destinationAccount.addTransaction(transaction);
+
+            return true;
+
+    }
 }
+
