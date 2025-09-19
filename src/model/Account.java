@@ -5,14 +5,15 @@ import java.util.HashSet;
 public class Account{
     private String accountNumber;
     private double sold;
-    private String accountType;
+    private AccountType accountType;
     private HashSet<Transaction> transactionsHistory;
 
-    public Account(String accountNumber, double sold, String accountType)
+    public Account(String accountNumber, double sold, AccountType accountType)
     {
         this.accountNumber = accountNumber;
         this.sold = sold;
         this.accountType = accountType;
+        this.transactionsHistory = new HashSet<>();
     }
 
     public void creditAccount(double total)
@@ -33,7 +34,7 @@ public class Account{
     {
         return sold;
     }
-    public String getAccountType()
+    public AccountType getAccountType()
     {
         return accountType;
     }
@@ -43,6 +44,13 @@ public class Account{
 
 
 
+    @Override
+    public String toString() {
+        return String.format("Account %s (%s) - Balance: %.2f DH",
+                accountNumber,
+                accountType.getDescription(),
+                sold);
+    }
 
 
 }

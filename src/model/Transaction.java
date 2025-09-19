@@ -47,9 +47,7 @@ public class Transaction {
         return date;
     }
 
-    public void addTransaction(Transaction transaction) {
-        transactionHistory.add(transaction);
-    }
+
 
 
 }

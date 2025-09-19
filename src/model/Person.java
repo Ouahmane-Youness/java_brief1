@@ -6,10 +6,11 @@ public abstract class Person {
     private String email;
     private String password;
 
-    public Person(String last_name, String first_name, String password)
+    public Person(String last_name, String first_name, String email, String password)
     {
         this.lastName = last_name;
         this.firstName = first_name;
+        this.email = email;
         this.password = password;
     }
 
@@ -24,6 +25,10 @@ public abstract class Person {
     public String getEmail()
     {
         return email;
+    }
+    public String getPassword()
+    {
+        return password;
     }
 
     public void setFirstName(String firstName)

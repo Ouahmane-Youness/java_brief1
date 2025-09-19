@@ -1,46 +1,51 @@
 package model;
 
+import java.util.Collection;
+import java.util.HashMap;
+
 public class Client extends Person{
-    private int id;
-    private String lastName;
-    private String firstName;
-    private String password;
-    private Account[] accounts;
-    private int accountNumber = 0;
+    private String idClient;
+    private HashMap<String, Account> accounts;
 
 
-    public Client(int id, String last_name, String first_name, String password)
+    public Client(String idClient, String lastName, String firstName, String email, String password)
     {
-        this.lastName = last_name;
-        this.firstName = first_name;
-        this.password = password;
-        this.id = id;
-        this.accounts = new Account[10];
+        super(lastName, firstName, email, password);
+        this.idClient = idClient;
+        this.accounts = new HashMap<>();
     }
 
     public void addAccount(Account account)
     {
-        if(accountNumber < accounts.length)
-        {
-            accounts[accountNumber] = account;
-            accountNumber++;
-        }
+        accounts.put(account.getAccountNumber(), account );
     }
 
-    public String getLastName()
+    public Account getAccount(String accountNumber)
     {
-        return lastName;
-    }
-    public String getFirstName()
-    {
-        return firstName;
-    }
-    public int getID()
-    {
-        return id;
+        return accounts.get(accountNumber);
     }
 
+    public boolean deleteAccount(String accountNumber)
+    {
+        return accounts.remove(accountNumber) != null;
+    }
 
+    public String getIdClient()
+    {
+        return idClient;
+    }
+    public void setIdClient(String idClient)
+    {
+        this.idClient = idClient;
+    }
+    public HashMap<String, Account> getComptes()
+    {
+        return accounts;
+    }
+    public Collection<Account> getAccountsCollection()
+    {
+        return accounts.values();
+    }
 
     @Override
     public void displayMenu() {
